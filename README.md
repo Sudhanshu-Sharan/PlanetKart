@@ -84,36 +84,9 @@ A complete analytics platform built with dbt and Snowflake, transforming raw e-c
                    └──────────────┘
 ```
 
-▶️ How to Run the Project
-📥 Prerequisites
-dbt (v1.0+)
-Python 3.7+
-Snowflake credentials configured via profiles.yml
-🔧 Setup Instructions
-Clone the repo
 
-https://github.com/subham-abd-17/Planetkart-Project.git
-Install dependencies:
-
-dbt deps
-Run models:
-
-dbt run
-Run tests:
-
-dbt test
-Run Snapshot:
-
-dbt snapshot
-Run whole pipeline:
-
-dbt build
-Generate and view documentation:
-
-dbt docs generate
-dbt docs serve
 📸 Screenshots
-✅ Airbyte Pipeline Setup
+
 
 ## 📊 Business Value
 
