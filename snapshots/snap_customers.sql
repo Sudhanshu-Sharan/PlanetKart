@@ -14,6 +14,7 @@
     )
 }}
 
+-- Enhanced customer snapshot that tracks meaningful business changes
 select
     c.customer_id,
     c.first_name,
@@ -22,6 +23,7 @@ select
     c.region_id,
     c.signup_date,
     
+    -- Add calculated fields that can change over time
     case
         when dc.total_revenue >= 300 then 'Platinum'
         when dc.total_revenue >= 150 then 'Gold'
