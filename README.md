@@ -61,28 +61,22 @@ A complete analytics platform built with dbt and Snowflake, transforming raw e-c
 
 ## ⭐ Star Schema Design
 
-```
-                    📊 FACT_ORDERS
-                   ┌─────────────────┐
-                   │ • order_sk (PK) │
-👥 DIM_CUSTOMERS   │ • customer_sk   │   📦 DIM_PRODUCTS
-┌──────────────┐   │ • region_sk     │   ┌──────────────┐
-│ customer_sk  │◄──┤ • order_revenue │──►│ product_sk   │
-│ customer_name│   │ • order_profit  │   │ product_name │
-│ revenue_seg  │   │ • total_quantity│   │ category     │
-│ lifecycle    │   │ • profit_tier   │   │ profit_seg   │
-│ churn_risk   │   │ • is_completed  │   │ sales_perf   │
-└──────────────┘   └─────────────────┘   └──────────────┘
-                           │
-                           ▼
-                   🌍 DIM_REGIONS
-                   ┌──────────────┐
-                   │ region_sk    │
-                   │ planet       │
-                   │ zone         │
-                   │ market_cat   │
-                   └──────────────┘
-```
+graph TB
+    subgraph "FACT TABLE"
+        F[fact_orders<br/>- order_sk (PK)<br/>- customer_sk (FK)<br/>- region_sk (FK)<br/>- order_revenue<br/>- order_profit<br/>- products_count<br/>- is_completed]
+    end
+    
+    subgraph "DIMENSION TABLES"
+        D1[dim_customers<br/>- customer_sk (PK)<br/>- customer_id<br/>- revenue_segment<br/>- lifecycle_stage<br/>- churn_risk<br/>- total_revenue<br/>- total_profit]
+        
+        D2[dim_products<br/>- product_sk (PK)<br/>- product_id<br/>- category<br/>- profit_segment<br/>- sales_performance<br/>- total_profit]
+        
+        D3[dim_regions<br/>- region_sk (PK)<br/>- region_id<br/>- planet<br/>- market_category<br/>- expansion_order]
+    end
+    
+    F -->|customer_sk| D1
+    F -->|region_sk| D3
+    D2 -.->|via order_items| F
 
 
 📸 Screenshots
