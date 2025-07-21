@@ -1,10 +1,9 @@
 
 <artifacts>
 <artifact identifier="clean_readme" type="text/markdown" title="Clean PlanetKart Analytics README">
+
 # 🌌 PlanetKart Analytics
-
-**Modern Data Engineering Platform for Multi-Planetary E-commerce**
-
+Modern Data Engineering Platform for Multi-Planetary E-commerce
 A complete analytics platform built with dbt and Snowflake, transforming raw e-commerce data into actionable business intelligence using industry best practices.
 
 ## 🎯 What This Project Demonstrates
