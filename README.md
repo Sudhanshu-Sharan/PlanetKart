@@ -86,6 +86,33 @@ A complete analytics platform built with dbt and Snowflake, transforming raw e-c
                    └──────────────┘
 ```
 
+## 📐 Design Decisions
+
+**Layered Architecture (4-tier)**:  
+- Raw → Staging → Marts → Analysis ensures scalable, testable pipelines  
+- Snapshots track historical changes (Type 2 SCD)
+
+**Star Schema Modeling**:  
+- One central fact table surrounded by dimensions for performant BI queries  
+- Intuitive structure supports executive reporting and self-serve analytics
+
+**Surrogate Keys & Naming**:  
+- Uses `dbt_utils.generate_surrogate_key` for scalable surrogate keys  
+- Models follow clear naming conventions (`dim_`, `stg_`, `fact_`)
+
+**Materialization Strategy**:  
+- Staging/Analysis = Views for freshness  
+- Marts = Tables for performance
+
+**Testing and Validation**:  
+- 25+ tests covering uniqueness, nulls, relationships, and business rules  
+- Historical tracking via snapshots ensures change management
+
+**Platform Choice**:  
+- **Snowflake** for elastic compute and SQL-native transformations  
+- **dbt** for versioned modeling, lineage, docs, and CI/CD readiness
+
+
 ## 🚀 How to Run and Test the Project
 
 ### Prerequisites
