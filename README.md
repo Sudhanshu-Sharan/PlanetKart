@@ -1,5 +1,6 @@
+
 <artifacts>
-<artifact identifier="final_readme" type="text/markdown" title="Final PlanetKart Analytics README">
+<artifact identifier="final_readme" type="text/markdown" title="Final PlanetKart Analytics README - Fixed">
 # 🌌 PlanetKart Analytics
 
 **Modern Data Engineering Platform for Multi-Planetary E-commerce**
@@ -116,7 +117,22 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Step 2: dbt Configuration
+### Step 2: Database Setup in Snowflake
+```sql
+-- Run these commands in Snowflake Web Interface
+USE ROLE ACCOUNTADMIN;
+
+-- Create database and schemas
+CREATE DATABASE IF NOT EXISTS PLANETKART;
+USE DATABASE PLANETKART;
+
+CREATE SCHEMA IF NOT EXISTS PLANETKART_RAW;
+
+-- Upload the 5 CSV files (customers, orders, order_items, products, regions)
+-- to PLANETKART_RAW schema using Snowflake UI or SnowSQL
+```
+
+### Step 3: dbt Configuration
 ```bash
 # Install dbt packages
 dbt deps
@@ -126,7 +142,7 @@ dbt debug
 ```
 *Should show "All checks passed!" if connection is successful*
 
-### Step 3: Build the Complete Pipeline
+### Step 4: Build the Complete Pipeline
 ```bash
 # Build all models in correct order
 dbt run
@@ -137,7 +153,7 @@ dbt run
 # - 4 analysis views
 ```
 
-### Step 4: Create Type 2 SCD Snapshot
+### Step 5: Create Type 2 SCD Snapshot
 ```bash
 # Create customer snapshot for change tracking
 dbt snapshot
@@ -146,7 +162,7 @@ dbt snapshot
 dbt ls -s snapshots
 ```
 
-### Step 5: Run Data Quality Tests
+### Step 6: Run Data Quality Tests
 ```bash
 # Execute all 25+ data quality tests
 dbt test
@@ -155,7 +171,7 @@ dbt test
 # Tests cover: unique keys, not null values, accepted values, relationships
 ```
 
-### Step 6: Generate Documentation
+### Step 7: Generate Documentation
 ```bash
 # Generate project documentation with lineage
 dbt docs generate
@@ -178,7 +194,6 @@ dbt run --select Advance_analysis # Business insights (4 views)
 # Quality assurance
 dbt test                          # 25+ automated tests
 dbt snapshot                      # Historical tracking
-dbt build                         # Runs everything
 
 # Documentation
 dbt docs generate && dbt docs serve
@@ -263,7 +278,6 @@ planetkart-analytics/
 - Earth (Home Base): 60% of revenue
 - Mars (Expansion): 25% of revenue, highest growth
 - Venus (Territory): 15% of revenue, emerging market
-
 
 ## 🎯 Project Metrics
 
