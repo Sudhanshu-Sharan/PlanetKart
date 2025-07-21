@@ -1,6 +1,6 @@
 
 <artifacts>
-<artifact identifier="final_readme" type="text/markdown" title="Final PlanetKart Analytics README - Fixed">
+<artifact identifier="clean_readme" type="text/markdown" title="Clean PlanetKart Analytics README">
 # 🌌 PlanetKart Analytics
 
 **Modern Data Engineering Platform for Multi-Planetary E-commerce**
