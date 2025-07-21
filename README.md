@@ -245,11 +245,11 @@ planetkart-analytics/
 
 ## Screenshots 
 
-**Dbt DAG Ref** : 
+**Dbt DAG Ref**: 
 
-<img width="1346" height="804" alt="image" src="https://github.com/user-attachments/assets/b5ee1f32-218c-479b-9250-7b4d33644766" />
+<img width="1346" height="804" alt="Screenshot 2025-07-21 at 11 06 05 PM" src="https://github.com/user-attachments/assets/df265791-1f9c-4547-a737-18f11fb8e833" />
 
-**Airbyte Initial Setup** : 
+**Airbyte Initial Setup**: 
 
 <img width="512" height="320" alt="Airbyte Initial setup " src="https://github.com/user-attachments/assets/ecff848a-9f07-40ac-9f01-2dfae54e9b29" />
 
