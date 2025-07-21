@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Customer dimension with business intelligence"
+    columns:
+      - name: customer_sk
+        description: "Surrogate key for customer dimension"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Natural key for customer"
+        tests:
+          - unique
+          - not_null
+      - name: revenue_segment
+        description: "Customer revenue segment"
+        tests:
+          - accepted_values:
+              values: ['High_Value', 'Medium_Value', 'Low_Value', 'No_Purchase']
+
+  - name: dim_products
+    description: "Product dimension with performance metrics"
+    columns:
+      - name: product_sk
+        description: "Surrogate key for product dimension"
+        tests:
+          - unique
+          - not_null
+      - name: product_id
+        description: "Natural key for product"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_regions
+    description: "Regional dimension"
+    columns:
+      - name: region_sk
+        description: "Surrogate key for region dimension"
+        tests:
+          - unique
+          - not_null
+
+  - name: fact_orders
+    description: "Order fact table with business metrics"
+    columns:
+      - name: order_sk
+        description: "Surrogate key for order fact"
+        tests:
+          - unique
+          - not_null
+      - name: customer_sk
+        description: "Foreign key to customer dimension"
+        tests:
+          - not_null
+      - name: order_revenue
+        description: "Total order revenue"
+        tests:
+          - not_null

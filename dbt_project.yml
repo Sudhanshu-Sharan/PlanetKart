@@ -1,0 +1,32 @@
+name: 'planetkart_analytics'
+version: '1.0.0'
+config-version: 2
+
+profile: 'planetkart_analytics'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  planetkart_analytics:
+    staging:
+      +materialized: view
+      +schema: planetkart_stage
+    marts:
+      +materialized: table
+      +schema: planetkart_analytics
+    Advance_analysis:                   
+      +materialized: view
+      +schema: advance_analytics  
+
+snapshots:
+  planetkart_analytics:
+    +target_schema: planetkart_snapshots

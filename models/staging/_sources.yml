@@ -1,0 +1,58 @@
+version: 2
+
+sources:
+  - name: planetkart_raw
+    description: "Raw data for PlanetKart e-commerce platform"
+    database: planetkart
+    schema: planetkart_raw
+    tables:
+      - name: customers
+        description: "Customer information across planets"
+        config:
+          freshness:
+            warn_after: {count: 7, period: day}
+            error_after: {count: 14, period: day}
+        columns:
+          - name: customer_id
+            description: "Unique customer identifier"
+            tests:
+              - unique
+              - not_null
+
+      - name: orders
+        description: "Order transactions"
+        config:
+          freshness:
+            warn_after: {count: 3, period: day}
+            error_after: {count: 7, period: day}
+        columns:
+          - name: order_id
+            description: "Unique order identifier"
+            tests:
+              - unique
+              - not_null
+
+      - name: order_items
+        description: "Individual items within orders"
+        
+      - name: products
+        description: "Product catalog"
+        config:
+          freshness:
+            warn_after: {count: 30, period: day}
+            error_after: {count: 90, period: day}
+        columns:
+          - name: product_id
+            description: "Unique product identifier"
+            tests:
+              - unique
+              - not_null
+
+      - name: regions
+        description: "Planetary regions"
+        columns:
+          - name: region_id
+            description: "Unique region identifier"
+            tests:
+              - unique
+              - not_null
