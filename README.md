@@ -61,26 +61,52 @@ A complete analytics platform built with dbt and Snowflake, transforming raw e-c
 
 ## ⭐ Star Schema Design
 
-graph TB
-    subgraph "FACT TABLE"
-        F[fact_orders<br/>- order_sk (PK)<br/>- customer_sk (FK)<br/>- region_sk (FK)<br/>- order_revenue<br/>- order_profit<br/>- products_count<br/>- is_completed]
-    end
-    
-    subgraph "DIMENSION TABLES"
-        D1[dim_customers<br/>- customer_sk (PK)<br/>- customer_id<br/>- revenue_segment<br/>- lifecycle_stage<br/>- churn_risk<br/>- total_revenue<br/>- total_profit]
-        
-        D2[dim_products<br/>- product_sk (PK)<br/>- product_id<br/>- category<br/>- profit_segment<br/>- sales_performance<br/>- total_profit]
-        
-        D3[dim_regions<br/>- region_sk (PK)<br/>- region_id<br/>- planet<br/>- market_category<br/>- expansion_order]
-    end
-    
-    F -->|customer_sk| D1
-    F -->|region_sk| D3
-    D2 -.->|via order_items| F
+```
+                    📊 FACT_ORDERS
+                   ┌─────────────────┐
+                   │ • order_sk (PK) │
+👥 DIM_CUSTOMERS   │ • customer_sk   │   📦 DIM_PRODUCTS
+┌──────────────┐   │ • region_sk     │   ┌──────────────┐
+│ customer_sk  │◄──┤ • order_revenue │──►│ product_sk   │
+│ customer_name│   │ • order_profit  │   │ product_name │
+│ revenue_seg  │   │ • total_quantity│   │ category     │
+│ lifecycle    │   │ • profit_tier   │   │ profit_seg   │
+│ churn_risk   │   │ • is_completed  │   │ sales_perf   │
+└──────────────┘   └─────────────────┘   └──────────────┘
+                           │
+                           ▼
+                   🌍 DIM_REGIONS
+                   ┌──────────────┐
+                   │ region_sk    │
+                   │ planet       │
+                   │ zone         │
+                   │ market_cat   │
+                   └──────────────┘
+```
 
+## 🚀 How to Run
 
-📸 Screenshots
+### Prerequisites
+- dbt with Snowflake connection configured
+- Access to PLANETKART database
 
+### Execute Project
+```bash
+# Build all models
+dbt run
+
+# Run by layer
+dbt run --select staging          # Clean data (5 views)
+dbt run --select marts            # Star schema (4 tables)
+dbt run --select Advance_analysis # Business insights (4 views)
+
+# Quality assurance
+dbt test                          # 25+ automated tests
+dbt snapshot                      # Historical tracking
+
+# Documentation
+dbt docs generate && dbt docs serve
+```
 
 ## 📊 Business Value
 
@@ -128,6 +154,72 @@ planetkart-analytics/
 ├── packages.yml             # Dependencies (dbt_utils)
 └── requirements.txt         # Python dependencies
 ```
+
+🧪 Data Quality Framework
+<img width="717" height="170" alt="image" src="https://github.com/user-attachments/assets/3e857b32-f29c-4559-89fd-58c093c44f52" />
+
+🚀 Quick Start
+Prerequisites
+bash# Required tools
+- Python 3.8+
+- dbt-core with Snowflake adapter
+- Snowflake account with ACCOUNTADMIN privileges
+- VS Code (recommended)
+Installation & Setup
+
+Clone Repository
+
+bashgit clone https://github.com/yourusername/planetkart-analytics.git
+cd planetkart-analytics
+
+Environment Setup
+
+bash# Create virtual environment
+python -m venv venv
+
+# Activate environment
+source venv/bin/activate  # Mac/Linux
+# OR
+venv\Scripts\activate     # Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
+Database Configuration
+
+sql-- Execute in Snowflake Web UI
+CREATE DATABASE PLANETKART;
+CREATE SCHEMA PLANETKART.PLANETKART_RAW;
+
+-- Upload CSV files to PLANETKART_RAW schema
+-- Files: customers.csv, orders.csv, order_items.csv, products.csv, regions.csv
+
+dbt Setup
+
+bash# Install dbt packages
+dbt deps
+
+# Verify connection
+dbt debug
+# Should return: "All checks passed!"
+Execution Commands
+Build Complete Pipeline
+bash# Build all models (recommended)
+dbt run
+
+# Build by layer
+dbt run --select staging          # 5 staging views
+dbt run --select marts            # 4 star schema tables  
+dbt run --select Advance_analysis # 4 business insight views
+Quality Assurance
+bash# Run all data quality tests
+dbt test
+
+# Create historical snapshots
+dbt snapshot
+
+# Generate documentation
+dbt docs generate && dbt docs serve
 
 ## 📈 Sample Analytics
 
