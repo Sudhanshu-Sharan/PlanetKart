@@ -1,3 +1,5 @@
+<artifacts>
+<artifact identifier="final_readme" type="text/markdown" title="Final PlanetKart Analytics README">
 # 🌌 PlanetKart Analytics
 
 **Modern Data Engineering Platform for Multi-Planetary E-commerce**
@@ -84,13 +86,86 @@ A complete analytics platform built with dbt and Snowflake, transforming raw e-c
                    └──────────────┘
 ```
 
-## 🚀 How to Run
+## 🚀 How to Run and Test the Project
 
 ### Prerequisites
-- dbt with Snowflake connection configured
-- Access to PLANETKART database
+```bash
+# Required tools
+- Python 3.8+
+- dbt-core with Snowflake adapter
+- Snowflake account with ACCOUNTADMIN privileges
+- VS Code (recommended)
+```
 
-### Execute Project
+### Step 1: Environment Setup
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/planetkart-analytics.git
+cd planetkart-analytics
+
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# Windows:
+venv\Scripts\activate
+# Mac/Linux:
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### Step 2: dbt Configuration
+```bash
+# Install dbt packages
+dbt deps
+
+# Test connection to Snowflake
+dbt debug
+```
+*Should show "All checks passed!" if connection is successful*
+
+### Step 3: Build the Complete Pipeline
+```bash
+# Build all models in correct order
+dbt run
+
+# Expected output: 13 models built successfully
+# - 5 staging views
+# - 4 marts tables  
+# - 4 analysis views
+```
+
+### Step 4: Create Type 2 SCD Snapshot
+```bash
+# Create customer snapshot for change tracking
+dbt snapshot
+
+# Verify snapshot created
+dbt ls -s snapshots
+```
+
+### Step 5: Run Data Quality Tests
+```bash
+# Execute all 25+ data quality tests
+dbt test
+
+# Expected: All tests should pass
+# Tests cover: unique keys, not null values, accepted values, relationships
+```
+
+### Step 6: Generate Documentation
+```bash
+# Generate project documentation with lineage
+dbt docs generate
+
+# Serve documentation locally (optional)
+dbt docs serve
+# Opens at http://localhost:8080
+```
+
+### Execute Project Commands
 ```bash
 # Build all models
 dbt run
@@ -103,6 +178,7 @@ dbt run --select Advance_analysis # Business insights (4 views)
 # Quality assurance
 dbt test                          # 25+ automated tests
 dbt snapshot                      # Historical tracking
+dbt build                         # Runs everything
 
 # Documentation
 dbt docs generate && dbt docs serve
@@ -110,9 +186,9 @@ dbt docs generate && dbt docs serve
 
 ## 📊 Business Value
 
-**Customer Intelligence**: Revenue segmentation, lifecycle analysis, churn risk identification
+**Customer Intelligence**: Revenue segmentation, lifecycle analysis, churn risk identification  
 **Product Analytics**: Profitability analysis, category performance, inventory optimization  
-**Regional Strategy**: Multi-planetary market analysis for expansion planning
+**Regional Strategy**: Multi-planetary market analysis for expansion planning  
 **Executive Reporting**: Real-time KPIs for strategic decision making
 
 ## 🔧 Key Design Decisions
@@ -121,6 +197,22 @@ dbt docs generate && dbt docs serve
 **Materialization**: Views for staging/analysis (fresh data), tables for marts (performance)  
 **Surrogate Keys**: Integer-based keys using `dbt_utils` for scalability  
 **Testing**: Comprehensive validation covering uniqueness, business rules, and data freshness
+
+## 🧪 Data Quality Framework
+
+| Test Category | Count | Purpose |
+|---------------|-------|---------|
+| **Uniqueness** | 8 tests | Ensure primary key integrity |
+| **Not Null** | 10 tests | Validate required fields |
+| **Relationships** | 4 tests | Check referential integrity |
+| **Accepted Values** | 3 tests | Validate business rules |
+| **Custom Logic** | 2 tests | Revenue/profit calculations |
+
+### Data Quality Features
+- **25+ Automated Tests**: Uniqueness, referential integrity, business rules
+- **Source Freshness**: Monitoring data recency with configurable alerts
+- **Type 2 SCD**: Historical tracking of customer profile changes
+- **Custom Validations**: Revenue calculations and profit logic verification
 
 ## 📁 Project Structure
 
@@ -155,72 +247,6 @@ planetkart-analytics/
 └── requirements.txt         # Python dependencies
 ```
 
-🧪 Data Quality Framework
-<img width="717" height="170" alt="image" src="https://github.com/user-attachments/assets/3e857b32-f29c-4559-89fd-58c093c44f52" />
-
-🚀 Quick Start
-Prerequisites
-bash# Required tools
-- Python 3.8+
-- dbt-core with Snowflake adapter
-- Snowflake account with ACCOUNTADMIN privileges
-- VS Code (recommended)
-Installation & Setup
-
-Clone Repository
-
-bashgit clone https://github.com/yourusername/planetkart-analytics.git
-cd planetkart-analytics
-
-Environment Setup
-
-bash# Create virtual environment
-python -m venv venv
-
-# Activate environment
-source venv/bin/activate  # Mac/Linux
-# OR
-venv\Scripts\activate     # Windows
-
-# Install dependencies
-pip install -r requirements.txt
-
-Database Configuration
-
-sql-- Execute in Snowflake Web UI
-CREATE DATABASE PLANETKART;
-CREATE SCHEMA PLANETKART.PLANETKART_RAW;
-
--- Upload CSV files to PLANETKART_RAW schema
--- Files: customers.csv, orders.csv, order_items.csv, products.csv, regions.csv
-
-dbt Setup
-
-bash# Install dbt packages
-dbt deps
-
-# Verify connection
-dbt debug
-# Should return: "All checks passed!"
-Execution Commands
-Build Complete Pipeline
-bash# Build all models (recommended)
-dbt run
-
-# Build by layer
-dbt run --select staging          # 5 staging views
-dbt run --select marts            # 4 star schema tables  
-dbt run --select Advance_analysis # 4 business insight views
-Quality Assurance
-bash# Run all data quality tests
-dbt test
-
-# Create historical snapshots
-dbt snapshot
-
-# Generate documentation
-dbt docs generate && dbt docs serve
-
 ## 📈 Sample Analytics
 
 **Customer Segmentation**:
@@ -238,12 +264,6 @@ dbt docs generate && dbt docs serve
 - Mars (Expansion): 25% of revenue, highest growth
 - Venus (Territory): 15% of revenue, emerging market
 
-## 🧪 Data Quality
-
-- **25+ Automated Tests**: Uniqueness, referential integrity, business rules
-- **Source Freshness**: Monitoring data recency with configurable alerts
-- **Type 2 SCD**: Historical tracking of customer profile changes
-- **Custom Validations**: Revenue calculations and profit logic verification
 
 ## 🎯 Project Metrics
 
@@ -256,3 +276,5 @@ dbt docs generate && dbt docs serve
 
 **Tech Stack**: dbt • Snowflake • SQL • Python • Git  
 **Contact**: [LinkedIn](https://linkedin.com/in/sudhanshu-sharan) | [Email](mailto:s.sharan5454@gmail.com)
+</artifact>
+</artifacts>
