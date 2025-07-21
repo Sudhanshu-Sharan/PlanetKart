@@ -274,25 +274,25 @@ planetkart-analytics/
 
 **Dbt DAG Ref**: 
 
-<img width="1346" height="804" alt="Screenshot 2025-07-21 at 11 06 05 PM" src="https://github.com/user-attachments/assets/df265791-1f9c-4547-a737-18f11fb8e833" />
+<img width="800" height="804" alt="Screenshot 2025-07-21 at 11 06 05 PM" src="https://github.com/user-attachments/assets/df265791-1f9c-4547-a737-18f11fb8e833" />
 
 **Airbyte Initial Setup**: 
 
-<img width="512" height="320" alt="Airbyte Initial setup " src="https://github.com/user-attachments/assets/ecff848a-9f07-40ac-9f01-2dfae54e9b29" />
+<img width="800" height="320" alt="Airbyte Initial setup " src="https://github.com/user-attachments/assets/ecff848a-9f07-40ac-9f01-2dfae54e9b29" />
 
 **Airbyte Data Moving**:
 
-<img width="512" height="320" alt="image" src="https://github.com/user-attachments/assets/c9379ed5-81ea-446b-9092-85ddc2f4ec4a" />
+<img width="800" height="320" alt="image" src="https://github.com/user-attachments/assets/c9379ed5-81ea-446b-9092-85ddc2f4ec4a" />
 
 **Snowflake Data**:
 
-<img width="2044" height="1184" alt="image" src="https://github.com/user-attachments/assets/045e37fe-6161-445f-8240-bd3d8eddf39a" />
+<img width="800" height="1184" alt="image" src="https://github.com/user-attachments/assets/045e37fe-6161-445f-8240-bd3d8eddf39a" />
 
-<img width="1094" height="733" alt="image" src="https://github.com/user-attachments/assets/701dc7a7-4882-4f05-acf9-76c4cf78d370" />
+<img width="800" height="733" alt="image" src="https://github.com/user-attachments/assets/701dc7a7-4882-4f05-acf9-76c4cf78d370" />
 
 **Dashobard In Progress**: 
 
-<img width="727" height="599" alt="Screenshot 2025-07-21 at 11 01 29 PM" src="https://github.com/user-attachments/assets/e62ca056-100e-4daa-8ae8-ef895d6f2ccc" />
+<img width="800" height="599" alt="Screenshot 2025-07-21 at 11 01 29 PM" src="https://github.com/user-attachments/assets/e62ca056-100e-4daa-8ae8-ef895d6f2ccc" />
 
 
 ## 📈 Sample Analytics
